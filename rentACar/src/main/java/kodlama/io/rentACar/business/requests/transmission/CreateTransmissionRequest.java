@@ -1,0 +1,14 @@
+package kodlama.io.rentACar.business.requests.transmission;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class CreateTransmissionRequest {
+	private String name;
+
+	
+}
