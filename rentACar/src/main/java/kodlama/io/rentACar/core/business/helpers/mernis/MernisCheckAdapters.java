@@ -4,6 +4,9 @@ import java.rmi.RemoteException;
 
 import org.springframework.stereotype.Service;
 
+import kodlama.io.rentACar.core.utilities.results.ErrorResult;
+import kodlama.io.rentACar.core.utilities.results.Result;
+import kodlama.io.rentACar.core.utilities.results.SuccessResult;
 import kodlama.io.rentACar.entities.concretes.IndividualCustomer;
 import tr.gov.nvi.tckimlik.WS.KPSPublicSoapProxy;
 
@@ -11,7 +14,7 @@ import tr.gov.nvi.tckimlik.WS.KPSPublicSoapProxy;
 public class MernisCheckAdapters implements MernisCheckService{
 
 	@Override
-	public boolean checkIfRealPerson(IndividualCustomer individualCustomer) {
+	public Result checkIfRealPerson(IndividualCustomer individualCustomer) {
 		KPSPublicSoapProxy client=new KPSPublicSoapProxy();
 		boolean result=false;
 		try {
@@ -21,11 +24,11 @@ public class MernisCheckAdapters implements MernisCheckService{
 						individualCustomer.getLastName(), 
 						individualCustomer.getDateOfBirth().getYear());
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			return new ErrorResult("fsgf");
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			return new ErrorResult("Mernis doğrulaması yapılamadı!");
 		}
-		return result;
+		return result ? new SuccessResult():new ErrorResult("Lütfen bilgilerinizi kontrol ediniz");
 	}
 
 }

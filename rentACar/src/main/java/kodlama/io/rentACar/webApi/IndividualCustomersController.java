@@ -46,7 +46,7 @@ public class IndividualCustomersController {
 	@PostMapping("/add")
 	@ResponseStatus(code= HttpStatus.CREATED)
 	public void add(@RequestBody() CreateIndividualCustomerRequest createIndividualCustomerRequest) {
-		this.individualCustomerService.add(createIndividualCustomerRequest);
+		 this.individualCustomerService.add(createIndividualCustomerRequest);
 	}
 	
 	@PutMapping("/update")

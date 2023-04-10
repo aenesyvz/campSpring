@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlama.io.rentACar.business.abstracts.ActivationCodeService;
+import kodlama.io.rentACar.core.utilities.results.Result;
 
 @RestController
 @RequestMapping("/api/activationcode")
@@ -23,6 +24,12 @@ public class ActivationCodeController {
     @GetMapping("/active/{code}")
     public boolean activateUser(@PathVariable String code){
         return this.activationCodeService.activationUser(code);
+       
+    }
+    
+    @GetMapping("/confirm")
+    public Result confirmUser(String email,String code){
+        return this.activationCodeService.confirmUserEmailForResetPassword(email,code);
        
     }
 }

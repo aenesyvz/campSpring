@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kodlama.io.rentACar.business.abstracts.UserService;
 import kodlama.io.rentACar.business.requests.userRequest.CreateUserRequest;
+import kodlama.io.rentACar.business.requests.userRequest.LoginRequest;
+import kodlama.io.rentACar.business.requests.userRequest.ResetPasswordRequest;
 import kodlama.io.rentACar.business.requests.userRequest.UpdateUserRequest;
 import kodlama.io.rentACar.business.responses.userResponse.GetByIdUserResponse;
 import kodlama.io.rentACar.business.responses.userResponse.GetListUserResponse;
@@ -61,12 +63,21 @@ public class UsersController {
 	}
 	
 	
+	@GetMapping("/sendConfirmCode/{email}")
+	public void sendConfirmCode(@PathVariable String email) {
+		this.userService.sendConfirmCode(email);
+	}
+	
+	@PostMapping("/login")
+	public GetByIdUserResponse login(@RequestBody() LoginRequest loginRequest) {
+		return this.userService.login(loginRequest);
+	}
 	
 	
-	
-	
-	
-	
+	@PutMapping("/resetPassword")
+	public void resetPassword(@RequestBody() ResetPasswordRequest resetPasswordRequest) {
+		this.userService.resetPassword(resetPasswordRequest);
+	}
 	
 	
 	

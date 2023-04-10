@@ -27,19 +27,12 @@ public class EmailManager implements EmailService{
 		String button = "<a href=" + link +">"
 					+ "<button style='background-color:blue;outline:none;border:none;border-radius:1rem;color:white;padding:.75rem 1rem'>Onayla</button>"
 				+ "</a> ";
-		 /*SimpleMailMessage message = new SimpleMailMessage();
-	        message.setSubject("HRMS Mail Dogrulama");
-	        message.setText("Hrms kayıt işleminizi tamamlamak için butona tıklayınız: " + button);
-	        message.setTo(user.getEmail());
-	        message.setFrom("devaey37@gmail.com");
-	       
-	        emailSender.send(message);*/
 		
 		String host = "smtp.gmail.com";
 		int port = 587;
-		String email = "devaey37@gmail.com";
-		String password = "ltfexqbvvypcvfpp";
-        String messageTxt = "Hrms kayıt işleminizi tamamlamak için butona tıklayınız <br/> <br/>" + button;
+		String email = "developeraey37@gmail.com";
+		String password = "bgtgjnmqbfonewpv";
+        String messageTxt = "Rent A Car kayıt işleminizi tamamlamak için butona tıklayınız <br/> <br/>" + button;
         
 		Properties prop =  new Properties();
 		
@@ -84,6 +77,60 @@ public class EmailManager implements EmailService{
 	   
 	       
 	        
+		
+	}
+
+	@Override
+	public void sendConfirmCode(User user, String code) {
+		
+		String host = "smtp.gmail.com";
+		int port = 587;
+		String email = "developeraey37@gmail.com";
+		String password = "bgtgjnmqbfonewpv";
+        String messageTxt = "Rent A Car şifre yenileme işleminizi tamamlamak için aşağıdaki kodu giriniz <br/> <br/>" + code;
+        
+		Properties prop =  new Properties();
+		
+		prop.put("mail.smtp.auth", true);
+		prop.put("mail.smtp.starttls.enable", "true");
+	    prop.put("mail.smtp.host", host);
+	    prop.put("mail.smtp.port", Integer.toString( port ));
+	    prop.put("mail.smtp.ssl.trust", host);
+	        
+	    try {
+	    Session session = Session.getInstance(prop, new Authenticator() {
+	           @Override
+	           protected PasswordAuthentication getPasswordAuthentication() {
+	                return new PasswordAuthentication(email, password);
+	           }
+	     });
+	        
+	    
+	    
+	   
+	  
+	    	Message message = new MimeMessage(session);
+	    	message.setSubject("Rent A Car Mail Dogrulama");
+	  
+	        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(user.getEmail()));
+	        message.setFrom(new InternetAddress(email));
+	        
+
+	        MimeBodyPart mimeBodyPartWithStyledText = new MimeBodyPart();
+	        mimeBodyPartWithStyledText.setContent(messageTxt, "text/html; charset=utf-8");
+	        
+	        Multipart multipart = new MimeMultipart();
+	        multipart.addBodyPart(mimeBodyPartWithStyledText);
+	        
+	        message.setContent(multipart);
+	        
+	        Transport.send(message);
+	        
+	    }catch(Exception e) {
+	    	
+	    }
+	   
+	       
 		
 	}
 }

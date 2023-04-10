@@ -1,6 +1,6 @@
 package kodlama.io.rentACar.business.requests.individualCustomerRequest;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,8 +10,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateIndividualCustomerRequest {
+	public String email;
+	public String password;
 	public String firstName;
 	public String lastName;
 	public String nationalityIdentity;
-	private Date dateOfBirth;
+	private LocalDate dateOfBirth;
+	private String phoneNumber;
 }

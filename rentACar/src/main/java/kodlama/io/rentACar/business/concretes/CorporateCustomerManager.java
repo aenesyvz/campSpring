@@ -14,6 +14,7 @@ import kodlama.io.rentACar.business.requests.corporateCustomerRequest.CreateCorp
 import kodlama.io.rentACar.business.requests.corporateCustomerRequest.UpdateCorporateCustomerRequest;
 import kodlama.io.rentACar.business.responses.corporateCustomerResponse.GetByIdCorporateCustomerResponse;
 import kodlama.io.rentACar.business.responses.corporateCustomerResponse.GetListCorporateCustomerResponse;
+import kodlama.io.rentACar.business.rules.UserBusinessRules;
 import kodlama.io.rentACar.core.utilities.mappers.ModelMapperService;
 import kodlama.io.rentACar.dataAccess.abstracts.CorporateCustomerRepository;
 import kodlama.io.rentACar.entities.concretes.CorporateCustomer;
@@ -24,15 +25,18 @@ public class CorporateCustomerManager implements CorporateCustomerService{
 	private CorporateCustomerRepository corporateCustomerRepository;
 	private EmailService emailService;
 	private ActivationCodeService activationCodeService;
+	private UserBusinessRules userBusinessRules;
 	@Autowired
 	public CorporateCustomerManager(ModelMapperService modelMapperService,
 			CorporateCustomerRepository corporateCustomerRepository,
-			EmailService emailService,ActivationCodeService activationCodeService) {
+			EmailService emailService,ActivationCodeService activationCodeService,
+			UserBusinessRules userBusinessRules) {
 		super();
 		this.modelMapperService = modelMapperService;
 		this.corporateCustomerRepository = corporateCustomerRepository;
 		this.emailService = emailService;
 		this.activationCodeService = activationCodeService;
+		this.userBusinessRules = userBusinessRules;
 	}
 
 	@Override
@@ -56,6 +60,8 @@ public class CorporateCustomerManager implements CorporateCustomerService{
 
 	@Override
 	public void add(CreateCorporateCustomerRequest createCorporateCustomerRequest) {
+		this.userBusinessRules.CheckIfEmailExists(createCorporateCustomerRequest.getEmail());
+		
 		CorporateCustomer corporateCustomer = this.modelMapperService.forRequest().map(createCorporateCustomerRequest, CorporateCustomer.class);
 		corporateCustomer.setId(0);
 		corporateCustomer.setMailVerify(false);
@@ -78,5 +84,14 @@ public class CorporateCustomerManager implements CorporateCustomerService{
 	public void delete(int id) {
 		this.corporateCustomerRepository.deleteById(id);
 		
+	}
+
+	@Override
+	public GetByIdCorporateCustomerResponse getByUserId(int id) {
+		Optional<CorporateCustomer> corporateCustomer = this.corporateCustomerRepository.findById(id);
+		GetByIdCorporateCustomerResponse response = this.modelMapperService.forResponse()
+				.map(corporateCustomer.get(), GetByIdCorporateCustomerResponse.class);
+		
+		return response;
 	}
 }

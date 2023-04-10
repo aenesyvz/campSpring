@@ -15,4 +15,5 @@ public interface CorporateCustomerService {
 	void add(CreateCorporateCustomerRequest createCorporateCustomerRequest);
 	void update(UpdateCorporateCustomerRequest updateCorporateCustomerRequest);
 	void delete(int id);
+	GetByIdCorporateCustomerResponse getByUserId(int userId);
 }

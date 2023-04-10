@@ -15,4 +15,5 @@ public interface IndividualCustomerService {
 	void add(CreateIndividualCustomerRequest createIndividualCustomerRequest);
 	void update(UpdateIndividualCustomerRequest updateIndividualCustomerRequest);
 	void delete(int id);
+	GetByIdIndividualCustomerResponse getByUserId(int id);
 }

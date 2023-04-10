@@ -23,6 +23,7 @@ public class RentACarApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RentACarApplication.class, args);
+		 System.setProperty("org.apache.commons.logging.LogFactory", "org.apache.commons.logging.impl.LogFactoryImpl");
 	}
 	
 	@ExceptionHandler

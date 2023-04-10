@@ -1,6 +1,6 @@
 package kodlama.io.rentACar.entities.concretes;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +31,9 @@ public class IndividualCustomer extends User{
 	public String nationalityIdentity;
 	
 	@Column(name="date_of_birth")
-	private Date dateOfBirth;
+	private LocalDate dateOfBirth;
+	
+	@Column(name="phone_number")
+	private String phoneNumber;
 	
 }

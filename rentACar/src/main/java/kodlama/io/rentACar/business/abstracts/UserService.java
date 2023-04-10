@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import kodlama.io.rentACar.business.requests.userRequest.CreateUserRequest;
+import kodlama.io.rentACar.business.requests.userRequest.LoginRequest;
+import kodlama.io.rentACar.business.requests.userRequest.ResetPasswordRequest;
 import kodlama.io.rentACar.business.requests.userRequest.UpdateUserRequest;
 import kodlama.io.rentACar.business.responses.userResponse.GetByIdUserResponse;
 import kodlama.io.rentACar.business.responses.userResponse.GetListUserResponse;
@@ -16,4 +18,7 @@ public interface UserService {
 	void add(CreateUserRequest createUserRequest);
 	void update(UpdateUserRequest updateUserRequest);
 	void delete(int id);
+	void resetPassword(ResetPasswordRequest resetPasswordRequest);
+	void sendConfirmCode(String email);
+	GetByIdUserResponse login(LoginRequest loginRequest); 
 }
