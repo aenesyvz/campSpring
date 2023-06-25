@@ -22,6 +22,9 @@ public class GetByIdCarResponse {
 	public int kilometer;
 	public int modelYear;
 	public String plate;
+	public String rentalBranchCityName;
+	public String rentalBranchDistrictName;
+	public String rentalBranchAddress;
 	public int transmissionId;
 	public String transmissionName;
 	public int fuelId;

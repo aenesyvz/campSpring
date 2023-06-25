@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 public class UpdateRentalBranchRequest {
 	public int id;
 	public int cityId;
+	public int districtId;
 	public String name;
 	public String address;
-	
+	public String phoneNumber;
+	public String email;
 }

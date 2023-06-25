@@ -16,6 +16,7 @@ public class UpdateCarRequest {
 	public int kilometer;
 	public int modelYear;
 	public String plate;
+	public int rentalBranchId;
 	public int transmissionId;
 	public int fuelId;
 	public int carStateId;

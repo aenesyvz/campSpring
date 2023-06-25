@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GetByIdRentalBranchResponse {
 	public int id;
-	public int cityId;
+	public String cityName;
+	public String districtName;
 	public String name;
 	public String address;
-	
+	public String phoneNumber;
+	public String email;
 }

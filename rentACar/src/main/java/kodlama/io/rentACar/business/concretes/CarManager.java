@@ -15,6 +15,8 @@ import kodlama.io.rentACar.business.responses.carImageResponse.GetListCarImageRe
 import kodlama.io.rentACar.business.responses.carResponse.GetByIdCarResponse;
 import kodlama.io.rentACar.business.responses.carResponse.GetListCarResponse;
 import kodlama.io.rentACar.core.utilities.mappers.ModelMapperService;
+import kodlama.io.rentACar.core.utilities.results.DataResult;
+import kodlama.io.rentACar.core.utilities.results.SuccessDataResult;
 import kodlama.io.rentACar.dataAccess.abstracts.CarRepository;
 import kodlama.io.rentACar.entities.concretes.Car;
 import kodlama.io.rentACar.entities.concretes.CarImage;
@@ -41,8 +43,14 @@ public class CarManager implements CarService{
 						map(car, GetListCarResponse.class)).collect(Collectors.toList());
 		
 		for (GetListCarResponse getListCarResponse : listResponse) {
-			CarImage carImage = this.carImageService.getListByCarId(getListCarResponse.getId()).get(0);
-			getListCarResponse.setCarImage(carImage);
+			List<CarImage> carImages = this.carImageService.getListByCarId(getListCarResponse.getId());
+			
+			if(carImages.isEmpty()) {
+				getListCarResponse.setCarImage(null); 
+			}else {
+				getListCarResponse.setCarImage(carImages.get(0));
+			}
+				
 		}
 		
 		return listResponse;
@@ -65,10 +73,11 @@ public class CarManager implements CarService{
 	}
 
 	@Override
-	public void add(CreateCarRequest createCarRequest) {
+	public DataResult<Car> add(CreateCarRequest createCarRequest) {
 		Car car = this.modelMapperService.forRequest().map(createCarRequest, Car.class);
 		car.setId(0);
-		this.carRepository.save(car);
+		Car addedCar = this.carRepository.save(car);
+		return new SuccessDataResult<Car>(addedCar);
 	}
 
 	@Override

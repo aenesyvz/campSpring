@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlama.io.rentACar.business.responses.carResponse.*;
+import kodlama.io.rentACar.core.utilities.results.DataResult;
+import kodlama.io.rentACar.entities.concretes.Car;
 import kodlama.io.rentACar.business.abstracts.CarService;
 import kodlama.io.rentACar.business.requests.carRequest.*;
 
@@ -43,8 +45,8 @@ public class CarsController {
 	
 	@PostMapping("/add")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public void add(@RequestBody() CreateCarRequest createCarRequest) {
-		this.carService.add(createCarRequest);
+	public DataResult<Car> add(@RequestBody() CreateCarRequest createCarRequest) {
+		return this.carService.add(createCarRequest);
 	}
 	
 	@PutMapping("/update")

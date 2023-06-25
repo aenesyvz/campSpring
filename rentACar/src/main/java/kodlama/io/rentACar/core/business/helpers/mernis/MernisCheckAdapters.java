@@ -7,22 +7,21 @@ import org.springframework.stereotype.Service;
 import kodlama.io.rentACar.core.utilities.results.ErrorResult;
 import kodlama.io.rentACar.core.utilities.results.Result;
 import kodlama.io.rentACar.core.utilities.results.SuccessResult;
-import kodlama.io.rentACar.entities.concretes.IndividualCustomer;
 import tr.gov.nvi.tckimlik.WS.KPSPublicSoapProxy;
 
 @Service
 public class MernisCheckAdapters implements MernisCheckService{
 
 	@Override
-	public Result checkIfRealPerson(IndividualCustomer individualCustomer) {
+	public Result checkIfRealPerson(String nationalityIdentity,String firstName,String lastName,int dateOfBirthYear ) {
 		KPSPublicSoapProxy client=new KPSPublicSoapProxy();
 		boolean result=false;
 		try {
 			result=client.TCKimlikNoDogrula(
-						Long.valueOf(individualCustomer.getNationalityIdentity()), 
-						individualCustomer.getFirstName(), 
-						individualCustomer.getLastName(), 
-						individualCustomer.getDateOfBirth().getYear());
+						Long.valueOf(nationalityIdentity), 
+						firstName,
+						lastName, 
+						dateOfBirthYear);
 		} catch (NumberFormatException e) {
 			return new ErrorResult("fsgf");
 		} catch (RemoteException e) {

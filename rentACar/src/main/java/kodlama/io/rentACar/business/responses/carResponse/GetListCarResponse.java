@@ -19,4 +19,7 @@ public class GetListCarResponse {
 	public int carStateId;
 	public int minFindeksCreditRate;
 	public CarImage carImage;
+	public String rentalBranchCityName;
+	public String rentalBranchDistrictName;
+	public String rentalBranchAddress;
 }

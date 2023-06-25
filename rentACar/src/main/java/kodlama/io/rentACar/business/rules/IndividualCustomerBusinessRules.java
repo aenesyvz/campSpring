@@ -23,7 +23,7 @@ public class IndividualCustomerBusinessRules {
 		this.mernisService = mernisService;
 	}
 	public void CheckIfRealPerson(IndividualCustomer individualCustomer) {
-		Result result = this.mernisService.CheckIfcheckIfRealPerson(individualCustomer);
+		Result result = this.mernisService.CheckIfcheckIfRealPerson(individualCustomer.getNationalityIdentity(),individualCustomer.getFirstName(),individualCustomer.getLastName(),individualCustomer.getDateOfBirth().getYear());
 		
 		if(!result.isSuccess()) {
 			throw new BusinessException(result.getMessage());

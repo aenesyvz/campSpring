@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateRentalBranchRequest {
 	public int cityId;
+	public int districtId;
 	public String name;
 	public String address;
-	
+	public String phoneNumber;
+	public String email;
 }

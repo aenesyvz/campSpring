@@ -56,6 +56,10 @@ public class Car {
 	@JoinColumn(name="fuel_id")
 	public Fuel fuel;
 	
+	@ManyToOne
+	@JoinColumn(name="rentalBranch_id")
+	public RentalBranch rentalBranch;
+	
 	@OneToMany(mappedBy = "car")
 	public List<CarDamage> carDamages;
 	
@@ -68,11 +72,12 @@ public class Car {
 	@Column(name="modelYear")
 	public int modelYear;
 	
-	@Column(name="plate")
+	@JoinColumn(name="plate")
 	public String plate;
 	
-	@Column(name="carState")
-	public int carState;
+	@ManyToOne
+	@JoinColumn(name="carState_id")
+	public CarState carState;
 	
 	@Column(name="minFindeksCreditRate")
 	public int minFindeksCreditRate;
